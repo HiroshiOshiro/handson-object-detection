@@ -5,7 +5,7 @@ import time
 
 
 app = Flask(__name__)
-camera = PiVideoStream(resolution=(600, 304), framerate=1).start()
+camera = PiVideoStream(resolution=(600, 304), framerate=10).start()
 time.sleep(2)
 
 
@@ -18,7 +18,7 @@ def gen(camera):
 
 @app.route('/')
 def index():
-    return Response(gen(camera),
+    return Response(gen(camera
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 

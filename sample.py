@@ -30,9 +30,18 @@ if __name__ == '__main__':
         use_reloader=False
     )
 
-＃ ここから追記2019/06/19
+# ここから追記
 net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
         '/home/pi/models/MobileNetSSD_deploy.caffemodel')
 
 
-def
+def detect(frame):
+    frame = cv2.resize(frame, (300, 300))
+    blob = cv2.dnn.blobFromImage(
+        image=frame,
+        scalefactor=0.007843,
+        size=(300, 300),
+        mean=127.5
+    )
+
+print(blob.shape)

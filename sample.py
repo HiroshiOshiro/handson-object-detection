@@ -2,7 +2,7 @@ from flask import Flask, Response, render_template
 from imutils.video.pivideostream import PiVideoStream
 import cv2
 import time
-
+import numpy as np
 
 app = Flask(__name__)
 camera = PiVideoStream(resolution=(400, 304), framerate=10).start()
@@ -29,3 +29,10 @@ if __name__ == '__main__':
         threaded=True,
         use_reloader=False
     )
+
+＃ ここから追記2019/06/19
+net = cv2.dnn.readNetFromCaffe('/home/pi/models/MobileNetSSD_deploy.prototxt',
+        '/home/pi/models/MobileNetSSD_deploy.caffemodel')
+
+
+def

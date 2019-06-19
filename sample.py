@@ -44,17 +44,17 @@ def detect(frame):
         mean=127.5
     )
 
-net.setInput(blob)
-out = net.forward()
+    net.setInput(blob)
+    out = net.forward()
 
-boxes = out[0,0,:,3:7] * np.array([300, 300, 300, 300])
-classes = out[0,0,:,1]
-confidences = out[0,0,:,2]
+    boxes = out[0,0,:,3:7] * np.array([300, 300, 300, 300])
+    classes = out[0,0,:,1]
+    confidences = out[0,0,:,2]
 
-for i, box in enumerate(boxes):
-    confidence = confidences[i]
-    if confidence < 0.2:
-        continue
+    for i, box in enumerate(boxes):
+        confidence = confidences[i]
+        if confidence < 0.2:
+            continue
 
         idx = int(classes[i])
         if idx != 15: # person
@@ -66,7 +66,8 @@ for i, box in enumerate(boxes):
         label = '{}: {:.2f}%'.format('Person', confidence * 100)
         y = startY - 15 if startY - 15 > 15 else startY + 15
         cv2.putText(frame, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-        return frame
+
+    return frame
 
 
 def gen(camera):
